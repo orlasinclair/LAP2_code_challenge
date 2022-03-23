@@ -1,3 +1,3 @@
 INSERT INTO posts (title, name, body, posting_date)
 VALUES
-    ('1st Post', 'anonymous', 'testing testing', '');
+    ('Hello World!', 'anonymous', 'This is a test', '03/23');

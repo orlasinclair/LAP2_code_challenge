@@ -38,28 +38,37 @@ function submitForm(e) {
     .catch(console.warn);
     
     
-    fill.innerHTML = "";
-    fetch("http://localhost:3000/posts") 
+    // Extracting the hash from the entire URL
+    // var hash = window.location.hash.substring(1);
+
+    
+    fetch(`http://localhost:3000/posts/`)
     .then(res => res.json())
-    .then(
-        res => {
-        console.log(res)
-            res.posts.forEach(element => {
-                let newList = document.createElement('li');
-                newList.textContent = `Title: ${element.title} + Author: ${element.name} + Current Date: ${element.posting_date}
-                                             + Content: ${element.body}`;
-                fill.append(newList);
-            });
+    .then(res => {
+        const id = res.posts.length + 1;
+        navigate(id);
     })
     .catch(console.warn)
-}
-
-async function getPost(title, time, id){
-    try {
-        const response = await fetch(url);
-        const data = await response.json()
-        return data;
-    } catch (err) {
-        console.warn(err);
+    
+    function navigate(id) {
+        var current = window.location.href;
+        window.location.href = current.replace(/#(.*)$/, '') + '#' + id;
     }
+
+    var hash = window.location.href.split('#')[1] || '';
+    console.log("this is hash: " + hash);
+
+    fill.innerHTML = "";
+    fetch(`http://localhost:3000/posts/${hash}`) 
+    .then(res => res.json())
+    .then(res => {
+            console.log(res)
+            console.log("This is the title: " + res.postid.title);
+            let newList = document.createElement('li');
+            newList.textContent = `Title: ${res.postid.title} + Author: ${res.postid.name} + Current Date: ${res.postid.posting_date}
+                                            + Content: ${res.postid.body}`;
+            fill.append(newList);
+
+    })
+    .catch(console.warn)
 }
