@@ -15,7 +15,7 @@ class Post {
                 const posts = postData.rows.map(p => new Post(p))
                 res(posts)
             }catch (err) {
-                rej ("Error recievong posts")
+                rej ("Error recieving posts")
             }
         }
         )
