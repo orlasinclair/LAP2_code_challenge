@@ -4,5 +4,6 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     title VARCHAR NOT NULL,
     name VARCHAR,
-    body VARCHAR NOT NULL
+    body VARCHAR NOT NULL,
+    posting_date DATE NOT NULL DEFAULT CURRENT_DATE
 );

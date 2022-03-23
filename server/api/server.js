@@ -5,7 +5,9 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-const port = process.env.PORT || 3000;
+const postRoutes = require('./controllers/posts')
+
+server.use('/posts', postRoutes)
 
 server.get('/', (req, res) => res.send('Hello, world!'))
 
