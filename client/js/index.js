@@ -36,31 +36,29 @@ function submitForm(e) {
     fetch("http://localhost:3000/posts", options)
         .then(res => res.json())
         .catch(console.warn);
-    changeHash();
+    
+    changeHash()
 }
-// Extracting the hash from the entire URL
-// var hash = window.location.hash.substring(1);
-
 
 function navigate(id) {
     var current = window.location.href;
     window.location.href = current.replace(/#(.*)$/, '') + '#' + id;
 }
 
-
-
 function changeHash() {
-
+    
     fetch(`http://localhost:3000/posts/`)
-        .then(res => res.json())
-        .then(res => {
-            const id = res.posts.length + 1;
-            navigate(id);
-        })
-        .catch(console.warn)
-
+    .then(res => res.json())
+    .then(res => {
+        const id = res.posts.length + 1;
+        navigate(id);
+        setTimeout(200);
+    })
+    .catch(console.warn)
+    
+    // Extracting the hash from the entire URL
+    // var hash = window.location.hash.substring(1);
     var hash = window.location.href.split('#')[1] || '';
-    console.log("this is hash: " + hash);
 
     fill.innerHTML = "";
     fetch(`http://localhost:3000/posts/${hash}`)
@@ -69,8 +67,8 @@ function changeHash() {
             console.log(res)
             console.log("This is the title: " + res.postid.title);
             let newList = document.createElement('li');
-            newList.textContent = `Title: ${res.postid.title} + Author: ${res.postid.name} + Current Date: ${res.postid.posting_date}
-                                            + Content: ${res.postid.body}`;
+            newList.textContent = `Title: ${res.postid.title} + Author: ${res.postid.name}  Current Date: ${res.postid.posting_date}
+                                             Content: ${res.postid.body}`;
             fill.append(newList);
 
         })
