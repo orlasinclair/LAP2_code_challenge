@@ -52,7 +52,6 @@ function changeHash() {
     .then(res => {
         const id = res.posts.length + 1;
         navigate(id);
-        setTimeout(200);
     })
     .catch(console.warn)
     
@@ -67,8 +66,8 @@ function changeHash() {
             console.log(res)
             console.log("This is the title: " + res.postid.title);
             let newList = document.createElement('li');
-            newList.textContent = `Title: ${res.postid.title} + Author: ${res.postid.name}  Current Date: ${res.postid.posting_date}
-                                             Content: ${res.postid.body}`;
+            newList.textContent = `Title: ${res.postid.title} + Author: ${res.postid.name} + Current Date: ${res.postid.posting_date}
+                                            + Content: ${res.postid.body}`;
             fill.append(newList);
 
         })
