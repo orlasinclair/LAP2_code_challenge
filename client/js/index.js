@@ -6,10 +6,21 @@ myForm.addEventListener("submit", submitForm);
 function submitForm(e) {
     e.preventDefault();
 
+    var currentdate = new Date();
+    let author = e.target.author.value;
+    var datetime =`${currentdate.getDate()}/${(currentdate.getMonth() + 1)}/${currentdate.getFullYear()}`;
+        // " - " +
+        // currentdate.getHours() +
+        // ":" +
+        // currentdate.getMinutes() +
+        // ":" +
+        // currentdate.getSeconds();
+
     const postData = {
         title: e.target.title.value,
-        name: e.target.author.value,
-        body: e.target.body.value 
+        name: author,
+        body: e.target.body.value,
+        posting_date: datetime
     }
 
     console.log(postData);
@@ -35,7 +46,8 @@ function submitForm(e) {
         console.log(res)
             res.posts.forEach(element => {
                 let newList = document.createElement('li');
-                newList.textContent = `Title: ${element.title} + Author: ${element.name} + Content: ${element.body}`;
+                newList.textContent = `Title: ${element.title} + Author: ${element.name} + Current Date: ${element.posting_date}
+                                             + Content: ${element.body}`;
                 fill.append(newList);
             });
     })

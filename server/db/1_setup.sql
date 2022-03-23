@@ -5,5 +5,5 @@ CREATE TABLE posts (
     title VARCHAR NOT NULL,
     name VARCHAR,
     body VARCHAR NOT NULL,
-    posting_date DATE NOT NULL DEFAULT CURRENT_DATE
+    posting_date VARCHAR
 );
