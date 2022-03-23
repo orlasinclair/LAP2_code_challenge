@@ -8,13 +8,13 @@ function submitForm(e) {
 
     var currentdate = new Date();
     let author = e.target.author.value;
-    var datetime =`${currentdate.getDate()}/${(currentdate.getMonth() + 1)}/${currentdate.getFullYear()}`;
-        // " - " +
-        // currentdate.getHours() +
-        // ":" +
-        // currentdate.getMinutes() +
-        // ":" +
-        // currentdate.getSeconds();
+    var datetime = `${currentdate.getDate()}/${(currentdate.getMonth() + 1)}/${currentdate.getFullYear()}`;
+    // " - " +
+    // currentdate.getHours() +
+    // ":" +
+    // currentdate.getMinutes() +
+    // ":" +
+    // currentdate.getSeconds();
 
     const postData = {
         title: e.target.title.value,
@@ -29,39 +29,43 @@ function submitForm(e) {
         method: 'POST',
         body: JSON.stringify(postData),
         headers: {
-            "Content-Type" : "application/json"
+            "Content-Type": "application/json"
         }
     }
 
     fetch("http://localhost:3000/posts", options)
-    .then(res => res.json())
-    .catch(console.warn);
-    
-    
-    // Extracting the hash from the entire URL
-    // var hash = window.location.hash.substring(1);
+        .then(res => res.json())
+        .catch(console.warn);
+    changeHash();
+}
+// Extracting the hash from the entire URL
+// var hash = window.location.hash.substring(1);
 
-    
+
+function navigate(id) {
+    var current = window.location.href;
+    window.location.href = current.replace(/#(.*)$/, '') + '#' + id;
+}
+
+
+
+function changeHash() {
+
     fetch(`http://localhost:3000/posts/`)
-    .then(res => res.json())
-    .then(res => {
-        const id = res.posts.length + 1;
-        navigate(id);
-    })
-    .catch(console.warn)
-    
-    function navigate(id) {
-        var current = window.location.href;
-        window.location.href = current.replace(/#(.*)$/, '') + '#' + id;
-    }
+        .then(res => res.json())
+        .then(res => {
+            const id = res.posts.length + 1;
+            navigate(id);
+        })
+        .catch(console.warn)
 
     var hash = window.location.href.split('#')[1] || '';
     console.log("this is hash: " + hash);
 
     fill.innerHTML = "";
-    fetch(`http://localhost:3000/posts/${hash}`) 
-    .then(res => res.json())
-    .then(res => {
+    fetch(`http://localhost:3000/posts/${hash}`)
+        .then(res => res.json())
+        .then(res => {
             console.log(res)
             console.log("This is the title: " + res.postid.title);
             let newList = document.createElement('li');
@@ -69,6 +73,6 @@ function submitForm(e) {
                                             + Content: ${res.postid.body}`;
             fill.append(newList);
 
-    })
-    .catch(console.warn)
+        })
+        .catch(console.warn)
 }
