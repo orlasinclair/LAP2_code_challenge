@@ -8,7 +8,7 @@ function submitForm(e) {
 
     const postData = {
         title: e.target.title.value,
-        author: e.target.author.value,
+        name: e.target.author.value,
         body: e.target.body.value 
     }
 
@@ -30,10 +30,12 @@ function submitForm(e) {
     fill.innerHTML = "";
     fetch("http://localhost:3000/posts") 
     .then(res => res.json())
-    .then(res => {
-            res.forEach(element => {
+    .then(
+        res => {
+        console.log(res)
+            res.posts.forEach(element => {
                 let newList = document.createElement('li');
-                newList.textContent = `Title: ${element.title} + Author: ${element.author} + Content: ${element.body}`;
+                newList.textContent = `Title: ${element.title} + Author: ${element.name} + Content: ${element.body}`;
                 fill.append(newList);
             });
     })
