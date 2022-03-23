@@ -22,13 +22,13 @@ function submitForm(e) {
         }
     }
 
-    fetch(url, options)
+    fetch("http://localhost:3000/posts", options)
     .then(res => res.json())
     .catch(console.warn);
     
     
     fill.innerHTML = "";
-    fetch(url) 
+    fetch("http://localhost:3000/posts") 
     .then(res => res.json())
     .then(res => {
             res.forEach(element => {
