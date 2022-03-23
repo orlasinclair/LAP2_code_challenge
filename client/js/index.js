@@ -9,7 +9,7 @@ function submitForm(e) {
     const postData = {
         title: e.target.title.value,
         author: e.target.author.value,
-        content: e.target.content.value 
+        body: e.target.body.value 
     }
 
     console.log(postData);
@@ -33,7 +33,7 @@ function submitForm(e) {
     .then(res => {
             res.forEach(element => {
                 let newList = document.createElement('li');
-                newList.textContent = `Title: ${element.title} + Author: ${element.author} + Content: ${element.content}`;
+                newList.textContent = `Title: ${element.title} + Author: ${element.author} + Content: ${element.body}`;
                 fill.append(newList);
             });
     })
