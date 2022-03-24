@@ -49,15 +49,14 @@ async function submitForm(e) {
     } catch (err) {
         console.warn(err)
     }
-}
-// Extracting the hash from the entire URL
-// var hash = window.location.hash.substring(1);
 
+}
 
 // function navigate(id) {
 //     var current = window.location.href;
 //     window.location.href = current.replace(/#(.*)$/, '') + '#' + id;
 // }
+
 
 
 
@@ -73,6 +72,7 @@ async function submitForm(e) {
 
 //     var hash = window.location.href.split('#')[1] || '';
 //     console.log("this is hash: " + hash);
+
 
 // async function getPostById(id){
 
